@@ -1,0 +1,4 @@
+EduNode API running on http://localhost:3000
+GET /students/stats 2.61ms
+GET /students/stats 1.08ms
+GET /students/stats 0.70ms
