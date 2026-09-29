@@ -1,46 +1,47 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_KEY = 'edunode-admin-key';
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const API_KEY = "edunode-admin-key";
 
 const studentsApi = axios.create({
-  baseURL: 'http://localhost:3000/students'
+  baseURL: `${API_URL}/students`,
 });
 
 const adminHeaders = {
-  'x-api-key': API_KEY
+  "x-api-key": API_KEY,
 };
 
 export const fetchStudents = async (filiere) => {
-  const response = await studentsApi.get('/', {
-    params: filiere ? { filiere } : {}
+  const response = await studentsApi.get("/", {
+    params: filiere ? { filiere } : {},
   });
   return response.data;
 };
 
 export const createStudent = async (student) => {
-  const response = await studentsApi.post('/', student, {
-    headers: adminHeaders
+  const response = await studentsApi.post("/", student, {
+    headers: adminHeaders,
   });
   return response.data;
 };
 
 export const updateStudent = async (id, student) => {
   const response = await studentsApi.put(`/${id}`, student, {
-    headers: adminHeaders
+    headers: adminHeaders,
   });
   return response.data;
 };
 
 export const deleteStudent = async (id) => {
   const response = await studentsApi.delete(`/${id}`, {
-    headers: adminHeaders
+    headers: adminHeaders,
   });
   return response.data;
 };
 
 export const fetchStats = async () => {
-  const response = await studentsApi.get('/stats');
+  const response = await studentsApi.get("/stats");
   return response.data;
 };
 
-export const getExportUrl = () => 'http://localhost:3000/students/export';
+export const getExportUrl = () => `${API_URL}/students/export`;
